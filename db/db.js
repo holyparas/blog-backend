@@ -67,6 +67,6 @@ async function main() {
 }
 
 // ⚠️ only call this when you actually want to reset DB
-main();
+// main();
 
 module.exports = pool;

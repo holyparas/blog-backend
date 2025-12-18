@@ -5,6 +5,10 @@ const { Pool } = pg;
 
 const pool = new Pool({
   connectionString: process.env.CONNECTION_STRING,
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? { rejectUnauthorized: false }
+      : false,
 });
 
 // DROP TABLES (child → parent)

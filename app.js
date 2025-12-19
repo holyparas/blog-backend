@@ -3,7 +3,14 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://blogpublictop.netlify.app/",
+      "https://blogauthortop.netlify.app/",
+    ],
+  })
+);
 app.use(express.json());
 
 app.get("/hello", (req, res) => {

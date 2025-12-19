@@ -14,19 +14,19 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors());
 
-app.use(express.json());
-
-app.get("/hello", (req, res) => {
-  res.json({ msg: "HELLO API" });
-});
-
+//handling pre-flight request
 app.use((req, res, next) => {
   if (req.method === "OPTIONS") {
     return res.sendStatus(204);
   }
   next();
+});
+
+app.use(express.json());
+
+app.get("/hello", (req, res) => {
+  res.json({ msg: "HELLO API" });
 });
 
 const postsAPI = require("./routes/posts");

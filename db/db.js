@@ -9,7 +9,19 @@ const pool = new Pool({
     process.env.NODE_ENV === "production"
       ? { rejectUnauthorized: false }
       : false,
+  connectionTimeoutMillis: 10000,
+  idleTimeoutMillis: 30000,
+  max: 5,
 });
+
+(async () => {
+  try {
+    await pool.query("SELECT 1");
+    console.log("✅ Database connected");
+  } catch (err) {
+    console.error("❌ Database connection failed on startup", err);
+  }
+})();
 
 // DROP TABLES (child → parent)
 const DROP_COMMENTS = `DROP TABLE IF EXISTS comments CASCADE;`;

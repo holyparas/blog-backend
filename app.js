@@ -3,14 +3,19 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-app.use(
-  cors({
-    origin: [
-      "https://blogpublictop.netlify.app/",
-      "https://blogauthortop.netlify.app/",
-    ],
-  })
-);
+
+const corsOptions = {
+  origin: [
+    "https://blogpublictop.netlify.app",
+    "https://blogauthortop.netlify.app",
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors());
+
 app.use(express.json());
 
 app.get("/hello", (req, res) => {

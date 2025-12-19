@@ -4,7 +4,7 @@ const pg = require("pg");
 const { Pool } = pg;
 
 const pool = new Pool({
-  connectionString: process.env.CONNECTION_STRING,
+  connectionString: process.env.DATABASE_URL,
   ssl:
     process.env.NODE_ENV === "production"
       ? { rejectUnauthorized: false }
